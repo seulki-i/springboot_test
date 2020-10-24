@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.web.mapper.EventTestMapper">
+
+
+<select id="findAll" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
+	SELECT idx, degree, net, wait, dt FROM event_test order by idx desc limit 3
+</select>
+
+</mapper>

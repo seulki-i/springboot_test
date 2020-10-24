@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title></title>
+	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-extend.min.css}">
+	<link rel="stylesheet" th:href="@{/js/plugins/chartjs/Chart.css}">
+	
+	<link rel="stylesheet" th:href="@{/css/common/adminlte.css}">
+	<link rel="stylesheet" th:href="@{/css/common/adminlte.min.css}">
+	
+
+<!--	-->
+	
+
+	<script th:src="@{/js/plugins/jquery/jquery.js}"></script>
+	<script th:src="@{/js/plugins/jquery/jquery.min.js}"></script>
+
+	<script th:src="@{/js/plugins/bootstrap/bootstrap.js}"></script>
+	
+	<script th:src="@{/js/plugins/handlebarsjs/handlebars-v4.7.3.js}"></script>
+	<script th:src="@{/js/plugins/handlebarsjs/handlebars.min-v4.7.3.js}"></script>
+
+	<script th:src="@{/js/plugins/chartjs/Chart.js}"></script>
+	
+	<script th:src="@{/js/plugins/datatables/jquery.dataTables.js}"></script>
+
+	<script th:src="@{/js/plugins/common/adminlte.js}"></script>
+
+</head>
+<body>
+
+	<th:block th:replace="web/layout/fragments/header"/><!-- header -->
+	
+	<th:block th:replace="web/layout/fragments/side"/><!-- side -->
+	
+	<div id="content" layout:fragment="content"></div><!--content-->
+
+	<th:block layout:fragment="additional-include-script"/><!-- 추가 Include Script -->
+</body>
+</html>
