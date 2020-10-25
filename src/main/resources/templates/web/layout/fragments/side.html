@@ -12,7 +12,7 @@
     <!-- Brand Logo -->
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="height :auto;">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       
@@ -21,16 +21,22 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+<!--      <nav class="mt-2">-->
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="treeview">
+            <a href="/findAll">
+              <i class="fa-table"></i>
+              <span> 전체 리스트</span></a>
+          </li>
           <li class="nav-item has-treeview menu-open">
-            
-            
+            <a href="/table">
+              <i class="fa-table"></i>
+              <span> 리스트</span></a>
           </li>
         </ul>
-      </nav>
+<!--      </nav>-->
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

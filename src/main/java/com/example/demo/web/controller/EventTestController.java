@@ -11,8 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class EventTestController {
 
+    @GetMapping("/findAll")
+    public ModelAndView findAll() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("web/findAll");
+        return modelAndView;
+    }
+
     @GetMapping("/table")
-    public ModelAndView test() {
+    public ModelAndView table() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("web/table");
         return modelAndView;

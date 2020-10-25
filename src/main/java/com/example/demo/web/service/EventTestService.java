@@ -3,6 +3,7 @@ package com.example.demo.web.service;
 import com.example.demo.web.dao.EventTestRepository;
 import com.example.demo.web.dto.EventTestVO;
 
+import com.example.demo.web.mapper.EventTestMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class EventTestService {
 
     private final ModelMapper modelMapper;
     private final EventTestRepository eventTestRepository;
-//	private final EventTestMapper eventTestMapper;
+	private final EventTestMapper eventTestMapper;
 
 
     public List<EventTestVO> findAll() {
@@ -28,5 +29,8 @@ public class EventTestService {
                 .collect(Collectors.toList());
     }
 
+    public List<EventTestVO> findLastList(){
+        return eventTestMapper.findLastList();
+    }
 
 }

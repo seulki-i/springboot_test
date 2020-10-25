@@ -36,7 +36,7 @@ const TableScope = {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: "/web/test",
+            url: "/web/table",
             dataType: 'json',
             // data: ,
             success: function success(response) {

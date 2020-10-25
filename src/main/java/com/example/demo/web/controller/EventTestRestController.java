@@ -17,8 +17,13 @@ import java.util.List;
 public class EventTestRestController {
     private final EventTestService eventTestService;
 
-    @GetMapping("/web/test")
+    @GetMapping("/web/findAll")
     public List<EventTestVO> findAll() {
         return eventTestService.findAll();
+    }
+
+    @GetMapping("/web/table")
+    public List<EventTestVO> findLastList(){
+        return eventTestService.findLastList();
     }
 }

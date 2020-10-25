@@ -12,4 +12,6 @@ import java.util.List;
 @Mapper
 public interface EventTestMapper {
     List<EventTestVO> findAll();
+
+    List<EventTestVO> findLastList();
 }
