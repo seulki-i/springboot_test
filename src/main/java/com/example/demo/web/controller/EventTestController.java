@@ -24,4 +24,11 @@ public class EventTestController {
         modelAndView.setViewName("web/table");
         return modelAndView;
     }
+
+    @GetMapping("/chart")
+    public ModelAndView chart() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("web/chart");
+        return modelAndView;
+    }
 }

@@ -14,4 +14,6 @@ public interface EventTestMapper {
     List<EventTestVO> findAll();
 
     List<EventTestVO> findLastList();
+
+    List<EventTestVO> findTenList();
 }

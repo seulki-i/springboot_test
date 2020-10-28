@@ -22,8 +22,13 @@ public class EventTestRestController {
         return eventTestService.findAll();
     }
 
-    @GetMapping("/web/table")
-    public List<EventTestVO> findLastList(){
+    @GetMapping("/web/lastList")
+    public List<EventTestVO> findLastList() {
         return eventTestService.findLastList();
+    }
+
+    @GetMapping("/web/findTenList")
+    public List<EventTestVO> findTenList() {
+        return eventTestService.findTenList();
     }
 }

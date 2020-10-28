@@ -29,8 +29,14 @@ public class EventTestService {
                 .collect(Collectors.toList());
     }
 
+    //최근에 들어온 값을 가져오는 리스트 (같은 시간에 들어온 한 묶음)
     public List<EventTestVO> findLastList(){
         return eventTestMapper.findLastList();
+    }
+
+    //현재 시간을 기준으로 10분전꺼까지 가져오는 리스트
+    public List<EventTestVO> findTenList(){
+        return eventTestMapper.findTenList();
     }
 
 }

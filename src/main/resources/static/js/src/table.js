@@ -17,6 +17,11 @@ const TableScope = {
         _this.bind.buttons(_this);
 
         _this.reload();
+
+        //10초에 한번씩 reload
+        setInterval(function() {
+            _this.reload();
+        }, 10000);
     },
 
     bind: {
@@ -24,9 +29,7 @@ const TableScope = {
             $("#reloadBtn").on("click", function () {
                 _this.reload();
             });
-
         }
-
     },
 
     reload: function () {
@@ -36,7 +39,7 @@ const TableScope = {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: "/web/table",
+            url: "/web/lastList",
             dataType: 'json',
             // data: ,
             success: function success(response) {
