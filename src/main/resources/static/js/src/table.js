@@ -10,6 +10,7 @@ const Page = {
 
 const TableScope = {
     $el: $("#TableScope"),
+    interval: null,
 
     init: function () {
         const _this = this;
@@ -19,7 +20,7 @@ const TableScope = {
         _this.reload();
 
         //10초에 한번씩 reload
-        setInterval(function() {
+        TableScope.interval = setInterval(function() {
             _this.reload();
         }, 10000);
     },
@@ -28,6 +29,10 @@ const TableScope = {
         buttons: function (_this) {
             $("#reloadBtn").on("click", function () {
                 _this.reload();
+            });
+
+            $("#stopBtn").on("click", function () {
+                clearInterval(ChartScope.interval);
             });
         }
     },
