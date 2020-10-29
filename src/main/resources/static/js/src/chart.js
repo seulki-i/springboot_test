@@ -33,7 +33,7 @@ const ChartScope = {
     bind: {
         buttons: function (_this) {
             $("#reloadBtn").on("click", function () {
-                _this.reload();
+                _this.getList();
             });
 
             $("#stopBtn").on("click", function () {
