@@ -10,6 +10,7 @@ const Page = {
 
 const ChartScope = {
     $el: $("#ChartScope"),
+    view : echarts.init(document.getElementById('charView')),
     chart_data: [], //초기 날짜
     chart_data1: [], //skt
     chart_data2: [], //kt
@@ -38,8 +39,6 @@ const ChartScope = {
             $("#stopBtn").on("click", function () {
                 clearInterval(ChartScope.interval);
             });
-
-
         }
     },
 
@@ -85,9 +84,6 @@ const ChartScope = {
         eCharts: function (response) {
             const _this = this;
 
-            //todo 이미 초기화된 돔 처리를 어떻게 할 것인가
-            const view = echarts.init(document.getElementById('charView'));
-
             const option = {
                 title: {
                     text: 'test'
@@ -116,7 +112,14 @@ const ChartScope = {
                         type: 'line',
                         itemStyle: {color: 'red'},
                         markLine: {
-                            lineStyle: {type: 'solid'},
+                            lineStyle: {type: 'dotted'}, //실선 : solid
+//                            label: {
+//                                normal: {
+//                                    show: false
+//                                },
+//                                formatter: '임계치'
+//                            },
+                            symbol: 'none', // 화살표? 표기 설정
                             data: [{
                                 yAxis: 600 //임계치
                             }]
@@ -128,7 +131,8 @@ const ChartScope = {
                         type: 'line',
                         itemStyle: {color: 'blue'},
                         markLine: {
-                            lineStyle: {type: 'solid'},
+                            lineStyle: {type: 'dotted'},
+                            symbol: 'none',
                             data: [{
                                 yAxis: 360
                             }]
@@ -140,7 +144,8 @@ const ChartScope = {
                         type: 'line',
                         itemStyle: {color: 'green'},
                         markLine: {
-                            lineStyle: {type: 'solid'},
+                            lineStyle: {type: 'dotted'},
+                            symbol: 'none',
                             data: [{
                                 yAxis: 240
                             }]
@@ -151,7 +156,7 @@ const ChartScope = {
                 ]
             };
 
-            view.setOption(option);
+            ChartScope.view.setOption(option);
         }
     }
 
