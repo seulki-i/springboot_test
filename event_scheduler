@@ -1,0 +1,56 @@
+BEGIN
+	declare skt_wait int(20);
+  	declare kt_wait int(20);
+  	declare lg_wait int(20);
+  	declare degree_temp int(20);
+	declare dt_temp datetime;
+
+	declare temp_skt_wait int(20);
+  	declare temp_kt_wait int(20);
+  	declare temp_lg_wait int(20);
+
+	SET degree_temp = (select degree from event_test order by idx DESC LIMIT 1) + 1;
+
+
+   SET temp_skt_wait = FLOOR(400 + RAND() * 201);
+   SET temp_kt_wait = FLOOR(240 + RAND() * 121);
+   SET temp_lg_wait = FLOOR(160 + RAND() * 81);
+
+  	SET dt_temp = NOW();
+
+  	IF (MINUTE(dt_temp) = 31 && SECOND(dt_temp) = 35) THEN
+	  SET skt_wait = (temp_skt_wait + 100);
+  	ELSE
+	  SET skt_wait = temp_skt_wait;
+  	END IF;
+
+  	IF (MINUTE(dt_temp) = 35 && SECOND(dt_temp) = 35) THEN
+	  SET kt_wait = (temp_kt_wait + 100);
+  	ELSE
+	  SET kt_wait = temp_kt_wait;
+  	END IF;
+
+  	IF (MINUTE(dt_temp) = 40 && SECOND(dt_temp) = 35) THEN
+	  SET lg_wait = (temp_lg_wait + 100);
+  	ELSE
+	  SET lg_wait = temp_lg_wait;
+  	END IF;
+
+
+   INSERT INTO event_test(degree, net, wait, dt) values(degree_temp, 'skt', skt_wait, dt_temp);
+   INSERT into event_test(degree, net, wait, dt) VALUES(degree_temp, 'kt' , kt_wait, dt_temp);
+   INSERT into event_test(degree, net, wait, dt) values(degree_temp, 'lg' , lg_wait, dt_temp);
+
+END
+
+------------
+
+BEGIN
+
+	declare dt_temp datetime;
+
+	SET dt_temp = DATE_SUB(NOW(), INTERVAL 20 MINUTE);
+
+	DELETE FROM event_test WHERE dt < dt_temp;
+
+END
