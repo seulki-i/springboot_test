@@ -10,6 +10,7 @@ const Page = {
 
 const TableScope = {
     $el: $("#TableScope"),
+    interval: null,
 
     init: function () {
         const _this = this;
@@ -17,6 +18,11 @@ const TableScope = {
         _this.bind.buttons(_this);
 
         _this.reload();
+
+        //10초에 한번씩 reload
+        TableScope.interval = setInterval(function() {
+            _this.reload();
+        }, 10000);
     },
 
     bind: {
@@ -25,8 +31,10 @@ const TableScope = {
                 _this.reload();
             });
 
+            $("#stopBtn").on("click", function () {
+                clearInterval(ChartScope.interval);
+            });
         }
-
     },
 
     reload: function () {
@@ -36,7 +44,7 @@ const TableScope = {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: "/web/table",
+            url: "/web/lastList",
             dataType: 'json',
             // data: ,
             success: function success(response) {

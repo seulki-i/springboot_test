@@ -16,4 +16,8 @@
 			ORDER BY idx DESC LIMIT 1);
 </select>
 
+	<select id="findLastList" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
+			SELECT * FROM event_test WHERE dt BETWEEN DATE_SUB(NOW(), INTERVAL 10 MINUTE) AND NOW()
+	</select>
+
 </mapper>
