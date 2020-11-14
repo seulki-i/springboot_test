@@ -3,17 +3,17 @@
 <mapper namespace="com.example.demo.web.mapper.EventTestMapper">
 
 
-<select id="findAll" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
-	SELECT idx, degree, net, wait, dt FROM event_test order by idx desc
-</select>
+	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
+		SELECT idx, degree, net, wait, dt FROM event_test order by idx desc
+	</select>
 
 	<select id="findLastList" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
-	SELECT idx, degree, net, wait, dt
-	FROM event_test
-	WHERE degree =
-	(SELECT degree
+		SELECT idx, degree, net, wait, dt
 		FROM event_test
-		ORDER BY idx DESC LIMIT 1);
+		WHERE degree =
+		(SELECT degree
+			FROM event_test
+			ORDER BY idx DESC LIMIT 1);
 </select>
 
 </mapper>
