@@ -2,9 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.web.mapper.EventTestMapper">
 
+	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestDTO" resultType="com.example.demo.web.dto.EventTestDTO" >
+		SELECT idx, degree, net, wait, dt FROM event_test
+		<where>
+		<if test="net != null and net != '' ">
+			AND net LIKE CONCAT('%',#{net},'%')
+		</if>
+		</where>
+		order by idx desc
+		LIMIT  #{page}, #{pageSize}
+	</select>
 
-	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
-		SELECT idx, degree, net, wait, dt FROM event_test order by idx desc
+	<select id="findAllTotalCount" resultType="java.lang.Long" >
+		SELECT COUNT(*) FROM
+			(SELECT idx, degree, net, wait, dt FROM event_test
+		<where>
+			<if test="net != null and net != '' ">
+				AND net LIKE CONCAT('%',#{net},'%')
+			</if>
+		</where>
+		) as cnt
 	</select>
 
 	<select id="findLastList" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
@@ -13,11 +30,11 @@
 		WHERE degree =
 		(SELECT degree
 			FROM event_test
-			ORDER BY idx DESC LIMIT 1);
+			ORDER BY idx DESC LIMIT 1)
 </select>
 
-	<select id="findLastList" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
-			SELECT * FROM event_test WHERE dt BETWEEN DATE_SUB(NOW(), INTERVAL 10 MINUTE) AND NOW()
+	<select id="findTenList" parameterType="com.example.demo.web.dto.EventTestVO" resultType="com.example.demo.web.dto.EventTestVO" >
+		SELECT * FROM event_test WHERE dt BETWEEN DATE_SUB(NOW(), INTERVAL 10 MINUTE) AND NOW()
 	</select>
 
 </mapper>

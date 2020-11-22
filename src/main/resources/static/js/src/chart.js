@@ -12,9 +12,9 @@ const ChartScope = {
     $el: $("#ChartScope"),
     view : echarts.init(document.getElementById('charView')),
     chart_data: [], //초기 날짜
-    chart_data1: [], //skt
-    chart_data2: [], //kt
-    chart_data3: [], //lg
+    chart_data1: [], //A
+    chart_data2: [], //B
+    chart_data3: [], //C
     interval: null,
 
     init: function () {
@@ -68,12 +68,12 @@ const ChartScope = {
             ChartScope.chart_data3 = []
 
             $.each(response, function (i, e) {
-                if (e.net === 'skt') {
+                if (e.net === 'A') {
                     ChartScope.chart_data1.push(e.wait);
                     ChartScope.chart_data.push(e.dt);
-                } else if (e.net === 'kt') {
+                } else if (e.net === 'B') {
                     ChartScope.chart_data2.push(e.wait);
-                } else if (e.net === 'lg') {
+                } else if (e.net === 'C') {
                     ChartScope.chart_data3.push(e.wait);
                 }
             });
@@ -90,7 +90,7 @@ const ChartScope = {
                 },
                 tooltip: {},
                 legend: { //위에 보여지는
-                    data: ['skt', 'kt', 'lg'],
+                    data: ['A', 'B', 'C'],
                 },
                 xAxis: [ // 시간
                     {
@@ -108,7 +108,7 @@ const ChartScope = {
                 ],
                 series: [
                     {
-                        name: 'skt',
+                        name: 'A',
                         type: 'line',
                         itemStyle: {color: 'red'},
                         markLine: {
@@ -127,7 +127,7 @@ const ChartScope = {
                         data: ChartScope.chart_data1
                     },
                     {
-                        name: 'kt',
+                        name: 'B',
                         type: 'line',
                         itemStyle: {color: 'blue'},
                         markLine: {
@@ -140,7 +140,7 @@ const ChartScope = {
                         data: ChartScope.chart_data2
                     },
                     {
-                        name: 'lg',
+                        name: 'C',
                         type: 'line',
                         itemStyle: {color: 'green'},
                         markLine: {
