@@ -16,7 +16,7 @@ const TableScope = {
 
         _this.bind.buttons(_this);
 
-        _this.reload();
+        _this.reload(1);
     },
 
     bind: {
@@ -29,7 +29,7 @@ const TableScope = {
 
     },
 
-    reload: function () {
+    reload: function (currentPage) {
         console.log("로드");
         const _this = this;
 
@@ -38,14 +38,25 @@ const TableScope = {
             contentType: "application/json",
             url: "/web/findAll",
             dataType: 'json',
-            // data: ,
-            success: function success(response) {
+            data: null,
+            success: function success(response, totalPage, totalCount) {
+                TableScope.$el.find("[id=currentPage]").val(currentPage);
 
                 const source = _this.$el.find("[data-template=result-body]");
 
                 const template = Handlebars.compile(source.html());
 
                 _this.$el.find("[data-scope=result-body]").html(template(response));
+
+                ConstFunction.pagination({
+                    _this : TableScope.$el,
+                    totalPage: totalPage,
+                    currentPage: currentPage,
+                    totalCount: totalCount,
+                    onPageClick: function (event, clickedPage) {
+                        _this.reload(clickedPage);
+                    }
+                });
 
             }
         });

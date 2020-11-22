@@ -1,11 +1,15 @@
 package com.example.demo.web.service;
 
+import com.example.demo.web.dao.EventTestDAO;
 import com.example.demo.web.dao.EventTestRepository;
+import com.example.demo.web.dto.EventTestDTO;
+import com.example.demo.web.dto.EventTestQuery;
 import com.example.demo.web.dto.EventTestVO;
 
 import com.example.demo.web.mapper.EventTestMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +22,18 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class EventTestService {
-
     private final ModelMapper modelMapper;
     private final EventTestRepository eventTestRepository;
 	private final EventTestMapper eventTestMapper;
-
+	private final EventTestDAO eventTestDAO;
 
     public List<EventTestVO> findAll() {
         return eventTestRepository.findAll().stream().map(v -> modelMapper.map(v, EventTestVO.class))
                 .collect(Collectors.toList());
+    }
+
+    public Page<EventTestDTO> getList(EventTestQuery query){
+        return eventTestDAO.getEventTest(query);
     }
 
     //최근에 들어온 값을 가져오는 리스트 (같은 시간에 들어온 한 묶음)
