@@ -4,12 +4,15 @@ import com.example.demo.web.dao.EventTestDAO;
 import com.example.demo.web.dao.EventTestRepository;
 import com.example.demo.web.dto.EventTestDTO;
 import com.example.demo.web.dto.EventTestQuery;
+import com.example.demo.web.dto.EventTestQuery2;
 import com.example.demo.web.dto.EventTestVO;
 
 import com.example.demo.web.mapper.EventTestMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +37,16 @@ public class EventTestService {
 
     public Page<EventTestDTO> getList(EventTestQuery query){
         return eventTestDAO.getEventTest(query);
+    }
+
+    public Page<EventTestDTO> getList2(EventTestQuery2 query2){
+        int page = query2.getPage();
+        int pageSize = query2.getPageSize();
+        query2.setPage(query2.getStartPage(page, pageSize));
+        List<EventTestDTO> list = eventTestMapper.findAll(query2);
+        List<EventTestDTO> eventTestDTOList = list.stream().map(EventTestDTO::of).collect(Collectors.toList());
+        Long totalSize = eventTestMapper.findAllTotalCount(query2);
+        return new PageImpl(eventTestDTOList, PageRequest.of(page, pageSize), totalSize);
     }
 
     //최근에 들어온 값을 가져오는 리스트 (같은 시간에 들어온 한 묶음)

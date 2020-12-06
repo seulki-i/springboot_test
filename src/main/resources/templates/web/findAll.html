@@ -20,16 +20,16 @@
     </div>
     <div class="content">
         <div class="row">
-
             <div class="col-sm-8">
-                <div class="card" id="TableScope">
+                <div class="card" data-scope="TableScope">
                     <div class="card-header">
                         <h3 class="box-title">최근 리스트</h3>
                     </div>
                     <div class="card-body">
                         <span data-field="totalCount" class="mr-3 align-middle"></span>
-                        <input id="currentPage" type="hidden"/>
-<!--                        <div id="TableScope">-->
+                        <div data-scope="criteria">
+                            <input data-field="currentPage" type="hidden"/>
+                        </div>
                             <table class="table table-bordered table-hover dataTable">
                                 <tr class="text-center">
                                     <th>인덱스</th>
@@ -56,9 +56,8 @@
                                 <tbody data-scope="result-body"></tbody>
                             </table>
                         </div>
-<!--                    </div>-->
                     <div class="card-footer">
-                        <div class="pagination" id="pagination_test"></div>
+                        <div class="pagination-sm" data-scope="pagination"></div>
                     </div>
                 </div>
             </div>

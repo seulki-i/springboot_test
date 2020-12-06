@@ -49,6 +49,8 @@ public class EventTestDAO extends BaseDAO {
                         r.getValue(eventTest.DT)
                 ));
 
-        return paging(resultList, query, jooq.fetchCount(selectOne().from(eventTest).where(condition)));
+        return paging(resultList, query, jooq.fetchCount(selectOne()
+                .from(eventTest)
+                .where(condition)));
     }
 }

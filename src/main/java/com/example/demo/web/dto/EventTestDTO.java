@@ -28,14 +28,14 @@ public class EventTestDTO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dt;
 
-//    public static EventTestDTO of(EventTestDTO data){
-//        EventTestDTO eventTestDTO = new EventTestDTO();
-//        eventTestDTO.setIdx(data.idx);
-//        eventTestDTO.setDegree(data.degree);
-//        eventTestDTO.setNet(data.getNet());
-//        eventTestDTO.setWait(data.getWait());
-//        return eventTestDTO;
-//    }
+    public static EventTestDTO of(EventTestDTO data){
+        EventTestDTO eventTestDTO = new EventTestDTO();
+        eventTestDTO.setIdx(data.idx);
+        eventTestDTO.setDegree(data.degree);
+        eventTestDTO.setNet(data.getNet());
+        eventTestDTO.setWait(data.getWait());
+        return eventTestDTO;
+    }
 //
 //    //0 , 10
 //    public int getStartPage(int page, int pageSize) {

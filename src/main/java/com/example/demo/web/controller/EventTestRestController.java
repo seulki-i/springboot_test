@@ -4,6 +4,7 @@ import com.example.demo.common.ApiResponse;
 import com.example.demo.common.BaseRestController;
 import com.example.demo.web.dto.EventTestDTO;
 import com.example.demo.web.dto.EventTestQuery;
+import com.example.demo.web.dto.EventTestQuery2;
 import com.example.demo.web.dto.EventTestVO;
 import com.example.demo.web.service.EventTestService;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,14 @@ public class EventTestRestController extends BaseRestController {
 //        return ok(eventTestService.getList(query));
 //    }
 
+//    @GetMapping("/web/findAll")
+//    public Page<EventTestDTO> getList(@ModelAttribute EventTestQuery query) {
+//        return eventTestService.getList(query);
+//    }
+
     @GetMapping("/web/findAll")
-    public Page<EventTestDTO> getList(@ModelAttribute EventTestQuery query) {
-        return eventTestService.getList(query);
+    public Page<EventTestDTO> getList(@ModelAttribute EventTestQuery2 query) {
+        return eventTestService.getList2(query);
     }
 
     @GetMapping("/web/lastList")

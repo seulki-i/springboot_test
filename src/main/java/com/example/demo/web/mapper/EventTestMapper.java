@@ -1,6 +1,7 @@
 package com.example.demo.web.mapper;
 
 import com.example.demo.web.dto.EventTestDTO;
+import com.example.demo.web.dto.EventTestQuery2;
 import com.example.demo.web.dto.EventTestVO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -12,9 +13,9 @@ import java.util.List;
  */
 @Mapper
 public interface EventTestMapper {
-    List<EventTestDTO> findAll(EventTestDTO search);
+    List<EventTestDTO> findAll(EventTestQuery2 search);
 
-    Long findAllTotalCount(EventTestDTO search);
+    Long findAllTotalCount(EventTestQuery2 search);
 
     List<EventTestVO> findLastList();
 

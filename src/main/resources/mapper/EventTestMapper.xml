@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.web.mapper.EventTestMapper">
 
-	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestDTO" resultType="com.example.demo.web.dto.EventTestDTO" >
+	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestQuery2" resultType="com.example.demo.web.dto.EventTestDTO" >
 		SELECT idx, degree, net, wait, dt FROM event_test
 		<where>
 		<if test="net != null and net != '' ">
@@ -13,7 +13,7 @@
 		LIMIT  #{page}, #{pageSize}
 	</select>
 
-	<select id="findAllTotalCount" resultType="java.lang.Long" >
+	<select id="findAllTotalCount" parameterType="com.example.demo.web.dto.EventTestQuery2"  resultType="java.lang.Long" >
 		SELECT COUNT(*) FROM
 			(SELECT idx, degree, net, wait, dt FROM event_test
 		<where>
