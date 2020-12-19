@@ -36,7 +36,7 @@ const TableScope = {
         console.log("로드");
         const _this = this;
 
-        _this.$el.scope("criteria").setFieldValue("currentPage", currentPage);
+        _this.$el.scope("criteria").setFieldValue("page", currentPage);
 
         $.ajax({
             type: "GET",
@@ -44,34 +44,17 @@ const TableScope = {
             url: "/web/findAll",
             dataType: 'json',
             data: $.scope("criteria").getFieldParameters(),
-            success: function success(response, totalPage, totalCount) {
-                // TableScope.$el.find("[id=currentPage]").val(currentPage);
+            success: function success(response) {
 
-                // const source = _this.$el.find("[data-template=result-body]");
-                //
-                // const template = Handlebars.compile(source.html());
-                //
-                // _this.$el.find("[data-scope=result-body]").html(template(response));
-                //
-                // ConstFunction.pagination({
-                //     _this : TableScope.$el,
-                //     totalPage: totalPage,
-                //     currentPage: currentPage,
-                //     totalCount: totalCount,
-                //     onPageClick: function (event, clickedPage) {
-                //         _this.reload(clickedPage);
-                //     }
-                // });
                 const template = _this.$el.template("result-body");
 
-                _this.$el.scope("result-body").html(template(response));
+                _this.$el.scope("result-body").html(template(response.content));
 
                 _this.$el.pagination({
-                    totalPage: totalPage,
+                    totalPage: response.totalPages,
                     currentPage: currentPage,
-                    totalCount: totalCount,
+                    totalCount: response.totalElements,
                     onPageClick: function (event, clickedPage) {
-                        // _this.$el.scope("criteria").setFieldValue("rowsPerPage", rowsPerPage);
 
                         _this.reload(clickedPage);
                     }

@@ -32,7 +32,7 @@ const TableScope = {
             });
 
             $("#stopBtn").on("click", function () {
-                clearInterval(ChartScope.interval);
+                clearInterval(TableScope.interval);
             });
         }
     },
@@ -49,11 +49,15 @@ const TableScope = {
             // data: ,
             success: function success(response) {
 
-                const source = _this.$el.find("[data-template=result-body]");
+                // const source = _this.$el.find("[data-template=result-body]");
+                //
+                // const template = Handlebars.compile(source.html());
+                //
+                // _this.$el.find("[data-scope=result-body]").html(template(response));
 
-                const template = Handlebars.compile(source.html());
+                const template = _this.$el.template("result-body");
 
-                _this.$el.find("[data-scope=result-body]").html(template(response));
+                _this.$el.scope("result-body").html(template(response));
 
             }
         });

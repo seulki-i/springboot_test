@@ -23,12 +23,12 @@
             <div class="col-sm-8">
                 <div class="card" data-scope="TableScope">
                     <div class="card-header">
-                        <h3 class="box-title">최근 리스트</h3>
+                        <h3 class="box-title">전체 리스트</h3>
                     </div>
                     <div class="card-body">
-                        <span data-field="totalCount" class="mr-3 align-middle"></span>
+                        <span data-field="totalCount" class="float-left ml-1"></span>
                         <div data-scope="criteria">
-                            <input data-field="currentPage" type="hidden"/>
+                            <input data-field="page" type="hidden"/>
                         </div>
                             <table class="table table-bordered table-hover dataTable">
                                 <tr class="text-center">
@@ -57,7 +57,7 @@
                             </table>
                         </div>
                     <div class="card-footer">
-                        <div class="pagination-sm" data-scope="pagination"></div>
+                        <div class="text-center" data-scope="pagination"></div>
                     </div>
                 </div>
             </div>

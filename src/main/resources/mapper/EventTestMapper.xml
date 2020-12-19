@@ -2,20 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.web.mapper.EventTestMapper">
 
-	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestQuery2" resultType="com.example.demo.web.dto.EventTestDTO" >
-		SELECT idx, degree, net, wait, dt FROM event_test
+	<select id="findAll" parameterType="com.example.demo.web.dto.EventTestQuery" resultType="com.example.demo.web.dto.EventTestDTO" >
+		SELECT idx, degree, net, wait, dt
+		FROM event_test
 		<where>
 		<if test="net != null and net != '' ">
 			AND net LIKE CONCAT('%',#{net},'%')
 		</if>
 		</where>
-		order by idx desc
+		order by idx
 		LIMIT  #{page}, #{pageSize}
 	</select>
 
-	<select id="findAllTotalCount" parameterType="com.example.demo.web.dto.EventTestQuery2"  resultType="java.lang.Long" >
+	<select id="findAllTotalCount" parameterType="com.example.demo.web.dto.EventTestQuery" resultType="java.lang.Long" >
 		SELECT COUNT(*) FROM
-			(SELECT idx, degree, net, wait, dt FROM event_test
+			(SELECT idx, degree, net, wait, dt
+			 FROM event_test
 		<where>
 			<if test="net != null and net != '' ">
 				AND net LIKE CONCAT('%',#{net},'%')

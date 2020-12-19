@@ -75,52 +75,52 @@ test {
     useJUnitPlatform()
 }
 
-jooq {
-    // generateSchemaSourceOnCompilation = false
-    version = '3.11.12' // the default (can be omitted) // 3.12 이후에는 1.9이후 사용 가능한 @Generated 가 클래스에 붙게 되어 3.11.0으로 제한한다.
-    edition = 'OSS'    // the default (can be omitted), other allowed values are PRO, PRO_JAVA_6, and TRIAL
-    master(sourceSets.main) {
-        jdbc { // DB 연결 정보 설정
-            driver = 'com.mysql.cj.jdbc.Driver'
-            url = 'jdbc:mysql://localhost:3336/test?serverTimezone=Asia/Seoul'
-            user = 'root'
-            password = 'admin123'
-        }
-        generator {
-            strategy {
-                name = null
-                matchers {
-                    schemas {
-                        schema {
-                            schemaClass {
-                                expression = 'JQMasterSchema'
-                            }
-                        }
-                    }
-                    tables {
-                        table {
-                            expression = 'event_test'
-                            tableClass {
-                                expression = 'JQEventTest'
-                            }
-                        }
-
-                    }
-                }
-            }
-            generate {
-                javaTimeTypes = true
-                records = false
-            }
-            database {
-                inputSchema = 'test' // DATABASE 설정
-                includes = 'event_test'
-
-            }
-            target {
-                packageName = 'com.example.demo.jooq'
-                directory = 'src/main/generated'
-            }
-        }
-    }
-}
+//jooq {
+//    // generateSchemaSourceOnCompilation = false
+//    version = '3.11.12' // the default (can be omitted) // 3.12 이후에는 1.9이후 사용 가능한 @Generated 가 클래스에 붙게 되어 3.11.0으로 제한한다.
+//    edition = 'OSS'    // the default (can be omitted), other allowed values are PRO, PRO_JAVA_6, and TRIAL
+//    master(sourceSets.main) {
+//        jdbc { // DB 연결 정보 설정
+//            driver = 'com.mysql.cj.jdbc.Driver'
+//            url = 'jdbc:mysql://localhost:3336/test?serverTimezone=Asia/Seoul'
+//            user = 'root'
+//            password = 'admin123'
+//        }
+//        generator {
+//            strategy {
+//                name = null
+//                matchers {
+//                    schemas {
+//                        schema {
+//                            schemaClass {
+//                                expression = 'JQMasterSchema'
+//                            }
+//                        }
+//                    }
+//                    tables {
+//                        table {
+//                            expression = 'event_test'
+//                            tableClass {
+//                                expression = 'JQEventTest'
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
+//            generate {
+//                javaTimeTypes = true
+//                records = false
+//            }
+//            database {
+//                inputSchema = 'test' // DATABASE 설정
+//                includes = 'event_test'
+//
+//            }
+//            target {
+//                packageName = 'com.example.demo.jooq'
+//                directory = 'src/main/generated'
+//            }
+//        }
+//    }
+//}

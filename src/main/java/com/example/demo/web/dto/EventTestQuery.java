@@ -1,23 +1,24 @@
 package com.example.demo.web.dto;
 
-import com.example.demo.common.BaseQuery;
+import com.example.demo.common.PageRequestDTO;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
  * @author skkim
- * @since 2020-11-22
+ * @since 2020-12-06
  */
-@Getter
-@Setter
-@NoArgsConstructor
-public class EventTestQuery extends BaseQuery {
-
+@Getter @Setter
+public class EventTestQuery extends PageRequestDTO {
     private String net;
 
-    public boolean hasNet(){
-        return has(this.net);
+    //0 , 10
+    public int getStartPage(int page, int pageSize) {
+        return (page -1) * pageSize;
+    }
+    //10, 20
+    public int getEndPage(int page, int pageSize) {
+        return page * pageSize;
     }
 
 }

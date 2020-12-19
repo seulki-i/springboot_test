@@ -1238,7 +1238,6 @@ $.fn.formatRadio = function () {
 $.fn.pagination = function (options) {
     const _this = this;
     const scopeNames = (null != options && null != options.scopeNames ? options.scopeNames : "pagination");
-    // this.scope("pagination").twbsPagination("destroy");
     _this.scope(scopeNames).twbsPagination("destroy");
     _this.setFieldText("totalCount", options.totalCount + "건");
     const defaultOptions = {
@@ -1260,7 +1259,7 @@ $.fn.pagination = function (options) {
 
         this.scope(scopeNames).twbsPagination(options);
 
-        this.scope(scopeNames).find("ul").addClass("justify-content-center");
+        this.scope(scopeNames).find("ul").addClass("pagination").addClass("justify-content-center");
     }
 };
 
