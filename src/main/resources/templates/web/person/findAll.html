@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="web/layout/base">
+<head>
+    <meta charset="UTF-8">
+    <title>테스트</title>
+
+</head>
+<body>
+<div class="content-wrapper" layout:fragment="content">
+    <div class="content-header">
+        <div class="row">
+        	<div class="col-sm-7">
+                <span>test</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card" data-scope="TableScope">
+                    <div class="card-header">
+                        <div data-scope="criteria">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="grey-label">성</div>
+                                    <div class="grid-cell">
+                                        <input type="text" data-field="firstName" class="form-control form-control-sm" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="grey-label">이름</div>
+                                    <div class="grid-cell">
+                                        <input type="text" data-field="lastName" class="form-control form-control-sm" maxlength="100"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-12">
+                                    <div class="float-right">
+                                        <button data-button="search" type="button" class="btn btn-sm btn-default">
+                                            <span class="fas fa-search mr-1"></span>조회하기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span data-field="totalCount" class="float-left ml-1"></span>
+                        <div data-scope="criteria">
+                            <input data-field="page" type="hidden"/>
+                        </div>
+                            <table class="table table-bordered table-hover dataTable">
+                                <tr class="text-center">
+                                    <th>인덱스</th>
+                                    <th>성</th>
+                                    <th>이름</th>
+                                    <th>나이</th>
+                                </tr>
+                                <script data-template="result-body" type="text/x-handlebars-template">
+                                    {{#each this}}
+                                    <tr class="text-left">
+                                        <td>{{personId}}</td>
+                                        <td>{{firstName}}</td>
+                                        <td>{{lastName}}</td>
+                                        <td>{{age}}</td>
+                                    </tr>
+                                    {{else}}
+                                    <tr>
+                                        <td class="text-center" colspan="4">데이터가 존재하지 않습니다.</td>
+                                    </tr>
+                                    {{/each}}
+                                </script>
+                                <tbody data-scope="result-body"></tbody>
+                            </table>
+                        </div>
+                    <div class="card-footer">
+                        <div class="text-center" data-scope="pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block layout:fragment="additional-include-script">
+    <script th:src="@{/js/src/person/findAll.js}"></script>
+</th:block>
+
+</body>
+</html>

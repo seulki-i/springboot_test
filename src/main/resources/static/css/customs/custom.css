@@ -1,0 +1,193 @@
+
+.hide {
+    display: none !important;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.grey-label {
+    width: 120px;
+    /*padding: 10px 10px;*/
+    padding: 5px 6px;
+    vertical-align: top;
+    min-height: 30px;
+    display: block;
+    float: left;
+    margin: 1px 0;
+    text-align: center;
+}
+
+:not(.mod-skin-dark) .grey-label {
+    background: #f3f7f9;
+    color: #333;
+}
+
+.mod-skin-dark .grey-label {
+    background-color: #363636;
+    color: #e5ebe1;
+}
+
+.grey-label-70 {
+    width: 70px !important;
+}
+
+.grey-label-150 {
+    width: 150px !important;
+}
+
+.grid-cell-plaintext {
+    /*background: #fff;*/
+    padding: 0 0 3px 10px;
+    /*color: #666;*/
+    vertical-align: middle;
+    min-height: 43px;
+    width: calc(100% - 120px) !important;
+    display: block;
+    float: left;
+    margin: 1px 0;
+}
+
+.grid-cell {
+    /*background: #fff;*/
+    padding: 3px 0 3px 10px;
+    /*color: #666;*/
+    vertical-align: middle;
+    min-height: 43px;
+    width: calc(100% - 120px) !important;
+    display: block;
+    float: left;
+    margin: 1px 0;
+}
+
+.grid-cell-70 {
+    width: calc(100% - 70px) !important;
+}
+
+.grid-cell-150 {
+    width: calc(100% - 150px) !important;
+}
+
+.grid-cell-txt {
+    line-height: 35px;
+    color: #212529;
+}
+
+.table-top-blue {
+    border-top: 2px solid #3e8ef7;
+}
+
+
+.w10 {
+    width: 10px !important;
+}
+
+.w20 {
+    width: 20px !important;
+}
+
+.w30 {
+    width: 30px !important;
+}
+
+.w40 {
+    width: 40px !important;
+}
+
+.w50 {
+    width: 50px !important;
+}
+
+.w60 {
+    width: 60px !important;
+}
+
+.w70 {
+    width: 70px !important;
+}
+
+.w75 {
+    width: 75px !important;
+}
+
+.w80 {
+    width: 80px !important;
+}
+
+.w90 {
+    width: 90px !important;
+}
+
+.w100 {
+    width: 100px !important;
+}
+
+.w110 {
+    width: 110px !important;
+}
+
+.w120 {
+    width: 120px !important;
+}
+
+.w130 {
+    width: 130px !important;
+}
+
+.w140 {
+    width: 140px !important;
+}
+
+.w150 {
+    width: 150px !important;
+}
+
+.w160 {
+    width: 160px !important;
+}
+
+.w170 {
+    width: 170px !important;
+}
+
+.w180 {
+    width: 180px !important;
+}
+
+.w190 {
+    width: 190px !important;
+}
+
+.w200 {
+    width: 200px !important;
+}
+
+.w250 {
+    width: 250px !important;
+}
+
+.w260 {
+    width: 260px !important;
+}
+
+.w300 {
+    width: 300px !important;
+}
+
+.w350 {
+    width: 350px !important;
+}
+
+.w400 {
+    width: 400px !important;
+}
+
+tbody > tr.selected {
+    background-color: #d2e7f1 !important;
+}
+
