@@ -1149,21 +1149,33 @@ $.fn.formatDatepicker = function () {
     var targets = this.find("[data-field-format=datepicker]");
 
     if (targets.length) {
-        const defaultConfig = {
-            "language": $("html").attr("lang"),
-            "format": _DATES.DEFAULT_FORMAT.toLowerCase(),
-            "todayBtn": "linked",
-            "autoclose": true,
-            "clearBtn": true,
-            "todayHighlight": true,
-            "templates": {
-                "leftArrow": '<i class="fal fa-chevron-left"></i>',
-                "rightArrow": '<i class="fal fa-chevron-right"></i>'
+        // const defaultConfig = {
+        //     "language": $("html").attr("lang"),
+        //     "format": _DATES.DEFAULT_FORMAT.toLowerCase(),
+        //     "todayBtn": "linked",
+        //     "autoclose": true,
+        //     "clearBtn": true,
+        //     "todayHighlight": true,
+        //     "templates": {
+        //         "leftArrow": '<i class="fal fa-chevron-left"></i>',
+        //         "rightArrow": '<i class="fal fa-chevron-right"></i>'
+        //     }
+        // };
+        // $.each(targets, function (index, element) {
+        //     const config = _.clone(defaultConfig);
+        //     _FORM.datepicker(element, config);
+        // });
+        targets.datepicker({
+            language : 'ko',
+            format: 'yyyy-mm-dd',
+            todayBtn: 'linked',
+            autoclose: true,
+            clearBtn: true,
+            todayHighlight: true,
+            templates: {
+                leftArrow: '<i class="fas fa-chevron-left"></i>',
+                rightArrow: '<i class="fas fa-chevron-right"></i>'
             }
-        };
-        $.each(targets, function (index, element) {
-            const config = _.clone(defaultConfig);
-            _FORM.datepicker(element, config);
         });
     }
 };
