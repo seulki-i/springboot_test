@@ -52,30 +52,30 @@
                         <div data-scope="criteria">
                             <input data-field="page" type="hidden"/>
                         </div>
-                            <table class="table table-bordered table-hover dataTable">
-                                <tr class="text-center">
-                                    <th>인덱스</th>
-                                    <th>성</th>
-                                    <th>이름</th>
-                                    <th>나이</th>
+                        <table class="table table-bordered table-hover dataTable">
+                            <tr class="text-center">
+                                <th>인덱스</th>
+                                <th>성</th>
+                                <th>이름</th>
+                                <th>나이</th>
+                            </tr>
+                            <script data-template="result-body" type="text/x-handlebars-template">
+                                {{#each this}}
+                                <tr class="text-left">
+                                    <td>{{personId}}</td>
+                                    <td>{{firstName}}</td>
+                                    <td>{{lastName}}</td>
+                                    <td>{{age}}</td>
                                 </tr>
-                                <script data-template="result-body" type="text/x-handlebars-template">
-                                    {{#each this}}
-                                    <tr class="text-left">
-                                        <td>{{personId}}</td>
-                                        <td>{{firstName}}</td>
-                                        <td>{{lastName}}</td>
-                                        <td>{{age}}</td>
-                                    </tr>
-                                    {{else}}
-                                    <tr>
-                                        <td class="text-center" colspan="4">데이터가 존재하지 않습니다.</td>
-                                    </tr>
-                                    {{/each}}
-                                </script>
-                                <tbody data-scope="result-body"></tbody>
-                            </table>
-                        </div>
+                                {{else}}
+                                <tr>
+                                    <td class="text-center" colspan="4">데이터가 존재하지 않습니다.</td>
+                                </tr>
+                                {{/each}}
+                            </script>
+                            <tbody data-scope="result-body"></tbody>
+                        </table>
+                    </div>
                     <div class="card-footer">
                         <div class="text-center" data-scope="pagination"></div>
                     </div>
