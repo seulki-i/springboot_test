@@ -472,8 +472,6 @@ $.fn.setFieldValue = function (fieldName, value) {
             }
         } else if (_that.tagName === "INPUT" && (_that.type === "number" || _that.type === "tel")) {
             $(_that).val(value).trigger("change");
-        } else if (_that.tagName === "SELECT") {
-            _SELECT.changeValue($(_that), value);
         } else if (_that.tagName === "TEXTAREA") {
             $(_that).val(value).trigger("change");
         } else {
@@ -512,18 +510,6 @@ $.fn.getFieldParameters = function () {
     $.each(_this.find("[data-field]"), function (i, e) {
         var _that = this;
 
-        const dataFieldFormat = $(_that).attr("data-field-format");
-        if ("daterangepicker" === dataFieldFormat) {
-            PARAMETERS[$(e).data("field")] = _DATES.formatting($(_that).data("daterangepicker").startDate);
-            PARAMETERS[$(e).data("end-field")] = _DATES.formatting($(_that).data("daterangepicker").endDate);
-        } else
-        if ("editor" === dataFieldFormat) {
-            if ("_EDITOR" in window) {
-                PARAMETERS[$(e).data("field")] = _EDITOR.getHtml(e);
-            } else {
-                PARAMETERS[$(e).data("field")] = null;
-            }
-        } else
         if (_that.tagName === "INPUT" && (_that.type === "radio" || _that.type === "checkbox")) {
             if (_that.type === "radio") {
                 PARAMETERS[$(e).data("field")] = _this.find("input[data-field=" + $(e).data("field") + "]:checked").val();
@@ -570,31 +556,15 @@ $.fn.fieldValidation = function () {
         var text = "";
 
         if ($(_that).attr("data-required") === "" && v.isBlank($(_that).val())) {
-            placeHolder = $(_that).attr("placeholder");
 
-            label = $(_that).attr("data-label");
-
-            text = v.isBlank(label) ? placeHolder : label;
-
-            if (v.isBlank(text)) {
-                _ALERT.error("필수 값을 입력하세요.", function () {
-                    setTimeout(function () {
-                        $(_that).focus();
-                    }, 150);
-                });
-            } else {
-                if ($(_that).prop("tagName") === "SELECT") {
-                    text = Josa(text, "을") + " 선택하세요.";
-                } else {
-                    text = Josa(text, "을") + " 입력하세요.";
-                }
-
-                _ALERT.error(text, function () {
-                    setTimeout(function () {
-                        $(_that).focus();
-                    }, 150);
-                });
-            }
+            swal({
+                title: "필수값을 입력하세요.",
+                type: "warning"
+            }, function () {
+                setTimeout(function () {
+                    $(_that).focus();
+                }, 150);
+            })
 
             isValid = false;
 
