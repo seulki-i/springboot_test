@@ -549,12 +549,6 @@ $.fn.fieldValidation = function () {
     $.each(_this.find("[data-field]"), function (i, e) {
         var _that = this;
 
-        var placeHolder = "";
-
-        var label = "";
-
-        var text = "";
-
         if ($(_that).attr("data-required") === "" && v.isBlank($(_that).val())) {
 
             swal({
@@ -567,54 +561,7 @@ $.fn.fieldValidation = function () {
             })
 
             isValid = false;
-
-            return false;
-        } else if ($(_that).attr("data-required") === "" && $(_that).attr("data-validation-type") === "ip") {
-            placeHolder = $(_that).attr("placeholder");
-
-            label = $(_that).attr("data-label");
-
-            text = v.isBlank(label) ? placeHolder : label;
-
-            var checkIp = /^(1|2)?\d?\d([.](1|2)?\d?\d){3}$/;
-
-            if (!checkIp.test($(_that).val())) {
-                text = "'" + text + "' 형식이 맞지 않습니다.";
-
-                _ALERT.error(text, function () {
-                    setTimeout(function () {
-                        $(_that).focus();
-                    }, 150);
-                });
-
-                isValid = false;
-
-                return false;
-            }
-        } else if ($(_that).attr("data-required") === "" && $(_that).attr("data-validation-type") === "phone") {
-            placeHolder = $(_that).attr("placeholder");
-
-            label = $(_that).attr("data-label");
-
-            text = v.isBlank(label) ? placeHolder : label;
-
-            var checkPhoneNumber = /^\d{2,3}-\d{3,4}-\d{4}$/;
-
-            if (!checkPhoneNumber.test($(_that).val())) {
-                text = "'" + text + "' 형식이 맞지 않습니다.";
-
-                _ALERT.error(text, function () {
-                    setTimeout(function () {
-                        $(_that).focus();
-                    }, 150);
-                });
-
-                isValid = false;
-
-                return false;
-            }
         }
-
     });
 
     return isValid;
@@ -637,14 +584,13 @@ $.fn.clearField = function (fieldName) {
             } else if (_that.prop("type") === "checkbox") {
                 _that.prop("checked", false);
             } else {
-                if (_that.attr("data-field-format") === "daterangepicker") {
-                    _DATERANGEPICKER.clear(_that);
+                if (_that.attr("data-field-format") === "datepicker") {
+                    var date = new Date();
+                    $(_this).data("datepicker").datepicker('setDate', date);
                 } else {
                     _that.val("");
                 }
             }
-        } else if (_that.prop("tagName") === "SELECT") {
-            _SELECT.changeAtFirstOption(_that);
         } else if (_that.prop("tagName") === "TEXTAREA") {
             _that.val("");
         }
@@ -657,14 +603,13 @@ $.fn.clearField = function (fieldName) {
             } else if (_this.prop("type") === "checkbox") {
                 _this.prop("checked", false);
             } else {
-                if (_this.attr("data-field-format") === "daterangepicker") {
-                    _DATERANGEPICKER.clear(_this);
+                if (_this.attr("data-field-format") === "datepicker") {
+                    var date = new Date();
+                    $(_this).data("datepicker").datepicker('setDate', date);
                 } else {
                     _this.val("");
                 }
             }
-        } else if (_this.prop("tagName") === "SELECT") {
-            _SELECT.changeAtFirstOption(_this);
         } else if (_this.prop("tagName") === "TEXTAREA") {
             _this.val("");
         }
@@ -696,14 +641,15 @@ $.fn.clearFields = function (skipHidden) {
                     $(_that).val("");
                 }
             } else {
-                if ($(_that).attr("data-field-format") === "daterangepicker") {
-                    _DATERANGEPICKER.clear($(_that));
+                if ($(_that).attr("data-field-format") === "datepicker") {
+                    var date = new Date();
+                    $(_that).data("datepicker").datepicker('setDate', date);
                 } else {
                     $(_that).val("");
                 }
             }
         } else if (_that.tagName === "SELECT") {
-            _SELECT.changeAtFirstOption($(_that));
+            $(_that).find(">option:first").prop("selected", true);
         } else if (_that.tagName === "TEXTAREA") {
             $(_that).val("");
         }
@@ -721,23 +667,11 @@ $.fn.fillFields = function (data, callbackFunc) {
 
         var _that = _this.find("[data-field=" + k + "]");
 
-        if ("daterangepicker" === _that.attr("data-field-format")) {
-            var dataEndField = _that.attr("data-end-field");
-
-            if (dataEndField in data) {
-                _that.data("daterangepicker").setStartDate(v);
-                _that.data("daterangepicker").setEndDate(data[dataEndField]);
-            }
-        } else
-        if ("datepicker" === _that.attr("data-field-format")) {
-            _that.datepicker("setDate", v);
-        } else if ("timepicker" === _that.attr("data-field-format")) {
-            _that.val(v).trigger("change");
-        } else if ("editor" === _that.attr("data-field-format")) {
-            _EDITOR.setHtml(_that.get(0), v);
-        } else if (_that.prop("tagName") === "INPUT" && (_that.prop("type") === "radio" || _that.prop("type") === "checkbox")) {
+        if ((_that.prop("tagName") === "INPUT" && (_that.prop("type") === "radio" || _that.prop("type") === "checkbox")) || _that.prop("tagName") === "INPUT") {
             $.each(_that, function (i, o) {
-                if ($(o).attr("data-field-format") === "checkbox") {
+                if (_that.prop("type") === "text" || _that.prop("type") === "number" || _that.prop("type") === "hidden") {
+                    _that.val(v);
+                } else if ($(o).attr("data-field-format") === "checkbox") {
                     let valueIfTrue = $(o).attr("data-field-value-if-true");
                     if (valueIfTrue === undefined) valueIfTrue = "Y";
 
@@ -748,6 +682,10 @@ $.fn.fillFields = function (data, callbackFunc) {
                         $(o).iCheck("uncheck");
                     }
                 } else if ($(o).attr("data-field-format") === "radio") {
+                    if(typeof(v) === "number"){
+                        v = v.toString()
+                    }
+
                     const checked = $(o).val() === v;
 
                     if (checked) {
@@ -763,119 +701,26 @@ $.fn.fillFields = function (data, callbackFunc) {
                     $(o).prop("checked", $(o).val() === v).trigger("change");
                 }
             });
-        } else if (_that.prop("tagName") === "SELECT") {
-            _SELECT.changeValue(_that, v);
-        } else {
+        } else if (_that.prop("tagName") === "TEXTAREA") {
             _that.val(v);
+        } else if (_that.prop("tagName") === "SELECT") {
+            $.each(_that, function (i, o) {
+                _that.val(v);
+                _that.selectpicker('refresh');
+            });
+
+        } else if ("timepicker" === _that.attr("data-field-format")) {
+            _that.val(v).trigger("change");
+        } else {
+            _that.text(v);
         }
+
     });
 
     if (undefined !== callbackFunc) {
         callbackFunc();
     }
 };
-
-/**
- * 필드 변경 이벤트를 추가한다.
- * @param fieldName 필드명
- * @param callBackFunc 변경 이벤트, 전달되지 않으면 변경 이벤트를 발생시킨다.
- * @param addEvent 이전 이벤트에 추가할지 지정한다. 지정하지 않거나 false를 지정하면 이전 이벤트를 지우고 새로 등록한다.
- */
-$.fn.changeField = function (fieldName, callBackFunc, addEvent) {
-    var $target = this.find("[data-field=" + fieldName + "]");
-
-    $target.assertOne(fieldName);
-
-    if (callBackFunc) {
-        if ($target.attr("data-field-format") === "select") {
-            _SELECT.change($target, callBackFunc, addEvent);
-        } else
-        if ($target.attr("data-field-format") === "daterangepicker") {
-            _DATERANGEPICKER.change($target, callBackFunc, addEvent);
-        } else {
-            if (addEvent !== true) {
-                // overwrite
-                $target.off("change").change(callBackFunc);
-            } else {
-                $target.change(callBackFunc);
-            }
-        }
-    } else {
-        $target.change();
-    }
-};
-
-$.fn.changeFields = function (fieldName, callBackFunc, addEvent) {
-    this.find("[data-field=" + fieldName + "]").each(function (index, element) {
-        var $target = $(element);
-
-        if (callBackFunc) {
-            if ($target.attr("data-field-format") === "select") {
-                _SELECT.change($target, callBackFunc, addEvent);
-            } else
-            if ($target.attr("data-field-format") === "daterangepicker") {
-                _DATERANGEPICKER.change($target, callBackFunc, addEvent);
-            } else {
-                if (addEvent !== true) {
-                    // overwrite
-                    $target.off("change").change(callBackFunc);
-                } else {
-                    $target.change(callBackFunc);
-                }
-            }
-        } else {
-            $target.change();
-        }
-    });
-};
-
-$.fn.bindCombo = function (data, type) {
-    _SELECT.bindOptions(this, data, type);
-};
-
-/**
- * @param disabled {boolean}
- */
-$.fn.disabled = function (disabled) {
-    if ("SELECT" === this.prop("tagName")) {
-        _SELECT.disabled(this, disabled);
-    } else {
-        this.prop("disabled", disabled);
-    }
-};
-
-$.fn.isDisabled = function () {
-    return this.is(":disabled");
-};
-
-$.fn.fieldsDisabled = function (disabled) {
-    var fields = this.find("[data-field]");
-
-    if (undefined === disabled) disabled = true;
-
-    fields.disabled(disabled);
-};
-
-$.fn.toggleDisabled = function () {
-//  chosen -> .select2
-    // this.prop("disabled", !this.prop("disabled"));
-    //
-    // this.trigger("chosen:updated");
-    if ("SELECT" === this.prop("tagName")) {
-        _SELECT.toggleDisabled(this);
-    } else {
-        this.prop("disabled", !this.prop("disabled"));
-    }
-};
-
-$.fn.fieldsToggleDisabled = function () {
-    var targets = this.find("[data-field]");
-
-    $.each(targets, function (i, e) {
-        $(e).toggleDisabled();
-    });
-};
-
 
 /**
  * this element 하위 자식중 버튼을 찾아 리턴한다.
@@ -1104,14 +949,11 @@ $.fn.formatTimepicker = function () {
     var targets = this.find("[data-field-format=timepicker]");
 
     if (targets.length) {
-        const config = {
-            'timeFormat': 'H:i',
-            "wrapHours": false,
-            "lang": { am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: '분', hr: '시간', hrs: '시간' }
-        };
-        $.each(targets, function (i, e) {
-            _FORM.timepicker(e, config);
-        })
+        targets.timepicker({
+            timeFormat: 'H:i',
+            wrapHours: false,
+            lang: {am: 'am', pm: 'pm', AM: 'AM', PM: 'PM', decimal: '.', mins: '분', hr: '시간', hrs: '시간'}
+        });
     }
 };
 
@@ -1119,28 +961,12 @@ $.fn.formatDatepicker = function () {
     var targets = this.find("[data-field-format=datepicker]");
 
     if (targets.length) {
-        // const defaultConfig = {
-        //     "language": $("html").attr("lang"),
-        //     "format": _DATES.DEFAULT_FORMAT.toLowerCase(),
-        //     "todayBtn": "linked",
-        //     "autoclose": true,
-        //     "clearBtn": true,
-        //     "todayHighlight": true,
-        //     "templates": {
-        //         "leftArrow": '<i class="fal fa-chevron-left"></i>',
-        //         "rightArrow": '<i class="fal fa-chevron-right"></i>'
-        //     }
-        // };
-        // $.each(targets, function (index, element) {
-        //     const config = _.clone(defaultConfig);
-        //     _FORM.datepicker(element, config);
-        // });
         targets.datepicker({
-            language : 'ko',
+            language: 'ko',
             format: 'yyyy-mm-dd',
             todayBtn: 'linked',
             autoclose: true,
-            clearBtn: true,
+            // clearBtn: true,
             todayHighlight: true,
             templates: {
                 leftArrow: '<i class="fas fa-chevron-left"></i>',
@@ -1150,17 +976,6 @@ $.fn.formatDatepicker = function () {
     }
 };
 
-$.fn.formatDaterangepicker = function () {
-    this.find("[data-field-format=daterangepicker]").each(function (index, element) {
-        _DATERANGEPICKER.initialize($(element));
-    });
-};
-
-$.fn.formatSelect = function () {
-    this.find("[data-field-format=select]").each(function (index, element) {
-        _SELECT.initialize($(element));
-    });
-};
 
 $.fn.formatCheckbox = function (options) {
     var defaultOptions = {};
@@ -1483,3 +1298,39 @@ $.fn.clearTable = function (scopeName) {
     });
 }
 
+const customFunction = {
+    /**
+     * 엑셀
+     * @param response
+     * @param option
+     */
+    excelExport: function (response, option) {
+
+        const tableEl = option.tmpTableEl[0];
+
+        let content = response.map(function (v, i) {
+            var temp = {};
+            option.calNmList.forEach(function (colNm) {
+                if ('' !== colNm) {
+                    temp[colNm] = v[colNm];
+                }
+            });
+            return temp;
+        });
+
+        const wb = XLSX.utils.book_new(),
+            wsh = XLSX.utils.table_to_sheet(tableEl);
+
+        const startRow = $(tableEl).find('thead tr').length;
+        XLSX.utils.sheet_add_json(wsh, content, {
+            skipHeader: true,
+            origin: {
+                r: parseInt(startRow),
+                c: 0
+            }
+        });
+        XLSX.utils.book_append_sheet(wb, wsh, option.type);
+
+        XLSX.writeFile(wb, option.fileName + "(" + moment(new Date()).format("YYYY-MM-DD") + ").xlsx");
+    }
+}

@@ -52,6 +52,14 @@ Handlebars.registerHelper("equals", function (a, b, options) {
     }
 });
 
+Handlebars.registerHelper("notEquals", function (a, b, options) {
+    if (a !== b) {
+        return options.fn(this);
+    } else {
+        return options.inverse(this);
+    }
+});
+
 Handlebars.registerHelper("isBlank", function (value, options) {
     if (v.isBlank(value)) {
         return options.fn(this);

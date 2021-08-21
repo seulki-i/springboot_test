@@ -8,6 +8,9 @@
 	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}">
 	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-extend.min.css}">
 	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap-sweetalert/sweetalert.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap-select/bootstrap-select.css}">
+	<link rel="stylesheet" th:href="@{/css/timepicker/jquery.timepicker.css}">
 
 	<link rel="stylesheet" th:href="@{/js/plugins/chartjs/Chart.css}">
 
@@ -21,50 +24,17 @@
 
 	<link rel="stylesheet" th:href="@{/css/customs/custom.css}">
 
-	<!--	-->
-
-	<script th:src="@{/js/plugins/jquery/jquery.js}"></script>
-
-	<script th:src="@{/js/plugins/echarts/echarts.js}"></script>
-
-	<script th:src="@{/js/plugins/bootstrap/bootstrap.js}"></script>
-	<script th:src="@{/js/plugins/bootstrap/bootstrap.bundle.min.js}"></script>
-
-	<script th:src="@{/js/plugins/bootstrap/bootstrap-datepicker/bootstrap-datepicker.js}"></script>
-	<script th:src="@{/js/plugins/bootstrap/bootstrap-datepicker/bootstrap-datepicker.ko.min.js}"></script>
-
-	<script th:src="@{/js/plugins/handlebarsjs/handlebars-v4.7.3.js}"></script>
-	<script th:src="@{/js/plugins/handlebarsjs/handlebars.min-v4.7.3.js}"></script>
-
-	<script th:src="@{/js/plugins/chartjs/Chart.js}"></script>
-
-	<script th:src="@{/js/plugins/datatables/jquery.dataTables.js}"></script>
-
-	<script th:src="@{/js/plugins/common/adminlte.js}"></script>
-
-	<script th:src="@{/js/plugins/twbs/jquery.twbsPagination.min.js}"></script>
-	<script th:src="@{/js/plugins/lodash/lodash.min.js}"></script>
-
-	<script th:src="@{/js/plugins/moment/moment.js}"></script>
-
-	<script th:src="@{/js/plugins/voca/voca.min.js}"></script>
-
-	<script th:src="@{/js/plugins/icheck/icheck.js}"></script>
-
-
-	<script th:src="@{/js/customs/CustomHelpers.js}"></script>
-	<script th:src="@{/js/customs/CustomFunctions.js}"></script>
-
-
 </head>
 <body>
 
-<th:block th:replace="web/layout/fragments/header"/><!-- header -->
+	<th:block th:replace="web/common/include-script"/><!-- 공통 Include Script 위치 -->
 
-<th:block th:replace="web/layout/fragments/side"/><!-- side -->
+	<th:block th:replace="web/layout/fragments/header"/><!-- header -->
 
-<div id="content" layout:fragment="content"></div><!--content-->
+	<th:block th:replace="web/layout/fragments/side"/><!-- side -->
 
-<th:block layout:fragment="additional-include-script"/><!-- 추가 Include Script -->
+	<div id="content" layout:fragment="content"></div><!--content-->
+
+	<th:block layout:fragment="additional-include-script"/><!-- 추가 Include Script -->
 </body>
 </html>
